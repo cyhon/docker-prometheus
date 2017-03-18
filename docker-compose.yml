@@ -1,0 +1,2 @@
+prometheus:
+    image: "docker.finogeeks.club/mesons/prometheus"

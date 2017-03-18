@@ -1,0 +1,7 @@
+publish:
+  docker:
+    repo: mesons/prometheus
+    file: Dockerfile
+    when:
+      branch: master
+      event: [push, pull_request]
