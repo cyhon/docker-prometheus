@@ -13,6 +13,9 @@ RUN export https_proxy=http://10.135.186.25:3128 \
     && rm -rf /var/lib/apt/lists/* && rm -f prometheus-${VERSION}.linux-amd64.tar.gz \
     && unset https_proxy
 
+ADD consoles /prometheus/consoles/
+ADD rules /prometheus/rules/
+
 EXPOSE     9090
 WORKDIR    /prometheus
 ENTRYPOINT [ "/prometheus/prometheus" ]

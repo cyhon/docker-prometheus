@@ -1,2 +1,4 @@
 prometheus:
     image: "docker.finogeeks.club/mesons/prometheus"
+    ports:
+        - "9090:9090"
