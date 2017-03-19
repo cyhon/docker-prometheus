@@ -15,6 +15,7 @@ RUN export https_proxy=http://10.135.186.25:3128 \
 
 ADD consoles /prometheus/consoles/
 ADD rules /prometheus/rules/
+ADD prometheus.yml /prometheus/
 
 EXPOSE     9090
 WORKDIR    /prometheus
