@@ -1,7 +1,7 @@
 FROM docker.finogeeks.club/base/ubuntu
 
 MAINTAINER "linhaitao@finogeeks.com"
-ENV VERSION 1.5.2
+ENV VERSION 1.6.3
 
 
 RUN export https_proxy=http://10.135.186.25:3128 \
