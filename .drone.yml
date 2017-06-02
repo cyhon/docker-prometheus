@@ -1,6 +1,6 @@
 publish:
   docker:
-    repo: mesons/prometheus
+    repo: base/prometheus
     file: Dockerfile
     when:
       branch: master

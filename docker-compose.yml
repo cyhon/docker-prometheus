@@ -1,9 +1,9 @@
 prometheus:
-    image: "docker.finogeeks.club/mesons/prometheus"
+    image: "docker.finogeeks.club/base/prometheus"
     ports:
         - "9999:9090"
 alertmanager:
-    image: "docker.finogeeks.club/base/alertmanager:v0.6.2"
+    image: "docker.finogeeks.club/base/alertmanager"
     ports:
         - "9093:9093"
 grafana:

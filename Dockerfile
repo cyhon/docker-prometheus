@@ -21,6 +21,7 @@ EXPOSE     9090
 WORKDIR    /prometheus
 ENTRYPOINT [ "/prometheus/prometheus" ]
 CMD        [ "-config.file=/prometheus/prometheus.yml", \
+			 "-alertmanager.url=http://alertmanager:9093", \
              "-storage.local.path=/prometheus/data", \
              "-web.console.libraries=/prometheus/console_libraries", \
              "-web.console.templates=/prometheus/consoles" ]
