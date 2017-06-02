@@ -1,7 +1,7 @@
-ALERT APIHighRequestLatency
-  IF synapse_http_server_requests{quantile="0.5"} > 0
+ALERT SynapseHTTPServerHighRequest
+  IF synapse_http_server_requests > 500
   FOR 1m
   ANNOTATIONS {
-    summary = "High request latency on {{ $labels.instance }}",
-    description = "{{ $labels.instance }} has a median request latency above 1s (current value: {{ $value }}s)",
+    summary = "{{ $labels.instance }} {{ $labels.alertname  }}",
+    description = "{{ $labels.instance }} QPS过高(当前值: {{ $value }}req/s)",
   }
