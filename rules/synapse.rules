@@ -1,5 +1,5 @@
 ALERT SynapseHTTPServerHighRequest
-  IF synapse_http_server_requests > 500
+  IF synapse_http_server_requests > 5000
   FOR 1m
   ANNOTATIONS {
     summary = "{{ $labels.instance }} {{ $labels.alertname  }}",
