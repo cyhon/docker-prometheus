@@ -1,5 +1,9 @@
-ALERT SynapseHTTPServerHighRequest
-  IF synapse_http_server_requests > 5000
+synapse_http_server_requests:method{servlet=""} = sum(synapse_http_server_requests) by (method)
+synapse_http_server_requests:servlet{method=""} = sum(synapse_http_server_requests) by (servlet)
+synapse_http_server_requests:total{servlet=""} = sum(synapse_http_server_requests:method) by (servlet)
+
+ALERT SynapseHTTPServerQPS
+  IF rate(synapse_http_server_requests:total[1m]) > 100
   FOR 1m
   ANNOTATIONS {
     summary = "{{ $labels.instance }} {{ $labels.alertname  }}",
