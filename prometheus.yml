@@ -31,3 +31,9 @@ scrape_configs:
     metrics_path: "/_synapse/metrics"
     static_configs:
       - targets: ['10.135.129.123:9092']
+        labels:
+          domain: 'finogeeks.club'
+
+      - targets: ['10.135.141.191:9092']
+        labels:
+          domain: 'finogeeks.com'
