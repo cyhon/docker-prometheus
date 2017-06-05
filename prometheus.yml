@@ -40,4 +40,4 @@ scrape_configs:
 
   - job_name: 'openldap'
     static_configs:
-      - targets: ['openldap_exporter:8080']
+      - targets: ['openldap-exporter:8080']
