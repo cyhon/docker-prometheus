@@ -1,11 +1,11 @@
 synapse_http_server_requests:method = sum(synapse_http_server_requests) by (domain, method)
 synapse_http_server_requests:servlet = sum(synapse_http_server_requests) by (domain, servlet)
 synapse_http_server_responses:code = sum(synapse_http_server_responses) by (domain, code)
-synapse_http_server_requests:total = sum(synapse_http_server_requests:method)
+synapse_http_server_requests:total = sum(synapse_http_server_requests:method) by (domain)
 
 synapse_http_client_requests:method = sum(synapse_http_client_requests) by (domain, method)
 synapse_http_client_responses:code = sum(synapse_http_client_responses) by (domain, code)
-synapse_http_client_requests:total = sum(synapse_http_client_requests:method)
+synapse_http_client_requests:total = sum(synapse_http_client_requests:method) by (domain)
 
 ALERT SynapseHTTPServerQPS
   IF rate(synapse_http_server_requests:total[1m]) > 100
