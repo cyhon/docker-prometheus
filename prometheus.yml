@@ -37,3 +37,7 @@ scrape_configs:
       - targets: ['10.135.141.191:9092']
         labels:
           domain: 'finogeeks.com'
+
+  - job_name: 'openldap'
+    static_configs:
+      - targets: ['openldap_exporter:8080']
