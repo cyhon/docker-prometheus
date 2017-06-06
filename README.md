@@ -1,9 +1,4 @@
 # Prometheus监控接入
-## Client Library
-* [Go](https://github.com/prometheus/client_golang)
-* [Java](https://github.com/prometheus/client_java)
-* [Python](https://github.com/prometheus/client_python)
-* [Node.js](https://github.com/siimon/prom-client)
 
 ## 数据模型
 Prometheus 的数据模型支持多维自定义，这个模型下的时序数据有metric name和一组key/value的labels组成。Prometheus的存储都是按时间序列去实现的，相同的metric name和labels组成一条时间序列，如果labels不同表示不同的时间序列。
@@ -42,6 +37,16 @@ job: api-server
 
 ## 数据采集
 
+* [Go](https://github.com/prometheus/client_golang)
+* [Java](https://github.com/prometheus/client_java)
+* [Python](https://github.com/prometheus/client_python)
+* [Node.js](https://github.com/siimon/prom-client)
+
+更多开发语言请参考[CLIENT LIBRARIES](https://prometheus.io/docs/instrumenting/clientlibs/)
 
 ## 数据上报
+### PULL模型
+参考[WRITING EXPORTER](https://prometheus.io/docs/instrumenting/writing_exporters/)
 
+### PUSH模型
+参考[PUSHING METRICS](https://prometheus.io/docs/instrumenting/pushing/)
