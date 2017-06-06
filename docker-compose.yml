@@ -1,19 +1,19 @@
 version: '2'
 services:
     prometheus:
-        image: "docker.finogeeks.club/base/prometheus"
+        image: "docker.finogeeks.club/monitor/prometheus"
         ports:
             - "9999:9090"
     alertmanager:
-        image: "docker.finogeeks.club/base/alertmanager"
+        image: "docker.finogeeks.club/monitor/alertmanager"
         ports:
             - "9093:9093"
     alert-webhook:
-        image: "docker.finogeeks.club/mesons/alert-webhook"
+        image: "docker.finogeeks.club/monitor/alert-webhook"
         environment:
             HOMESERVER_URL: http://10.135.129.123:8008
     grafana:
-        image: "docker.finogeeks.club/base/grafana"
+        image: "docker.finogeeks.club/monitor/grafana"
         ports:
             - "3000:3000"
         environment:
