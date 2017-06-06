@@ -1,8 +1,7 @@
 
 ALERT OpenLDAPServerStatus
-  IF absent(openldap_up) == 1
-  FOR 1m
+  IF absent(openldap_up) == 1 or openldap_up == 0
   ANNOTATIONS {
-    summary = "{{ $labels.domain }} OpenLDAPServerStatus",
+    summary = "OpenLDAPServerStatus",
     description = "监控数据断流，请检查服务是否正常!",
   }
