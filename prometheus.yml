@@ -52,3 +52,7 @@ scrape_configs:
       - targets: ['10.135.129.123:9094']
         labels:
           domain: 'finogeeks.com'
+
+  - job_name: 'RCS'
+    static_configs:
+      - targets: ['10.135.154.82:9093']
