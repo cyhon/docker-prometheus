@@ -56,3 +56,8 @@ scrape_configs:
   - job_name: 'RCS'
     static_configs:
       - targets: ['10.135.154.82:9093']
+
+  - job_name: 'rancher'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['rancher-exporter:9173']

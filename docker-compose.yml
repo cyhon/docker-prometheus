@@ -25,3 +25,12 @@ services:
             GF_SERVER_ROOT_URL: http://localhost
         volumes:
             - "/var/monitor/grafana:/var/lib/grafana"
+    rancher-exporter:
+        image: docker.finogeeks.club/monitor/rancher-exporter:v0.22.52
+        environment:
+            CATTLE_ACCESS_KEY: "4F4D2BE02702446C04C2"
+            CATTLE_SECRET_KEY: "Tvu9ghH6dYJGRYjJDEHHqLhHMBXXyShg2GRoaHA3"
+            CATTLE_URL: "http://10.135.158.124:8080/v2-beta"
+            HIDE_SYS: "true"
+        ports:
+          - "9173:9173"
