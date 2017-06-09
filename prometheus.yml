@@ -61,3 +61,8 @@ scrape_configs:
     scrape_interval: 1m
     static_configs:
       - targets: ['rancher-exporter:9173']
+
+  - job_name: 'cAdvisor'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['10.135.150.187:55555', '10.135.167.160:55555']

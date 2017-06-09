@@ -32,5 +32,12 @@ services:
             CATTLE_SECRET_KEY: "Tvu9ghH6dYJGRYjJDEHHqLhHMBXXyShg2GRoaHA3"
             CATTLE_URL: "http://10.135.158.124:8080/v2-beta"
             HIDE_SYS: "true"
+    cadvisor:
+        image: docker.finogeeks.club/monitor/cadvisor
+        volumes:
+          - /:/rootfs:ro
+          - /var/run:/var/run:rw
+          - /sys:/sys:ro
+          - /var/lib/docker/:/var/lib/docker:ro
         ports:
-          - "9173:9173"
+          - "8080:8080"
