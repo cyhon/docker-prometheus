@@ -1,5 +1,23 @@
 version: '2'
 services:
+    grafana:
+        image: "docker.finogeeks.club/monitor/grafana"
+        ports:
+            - "3000:3000"
+        environment:
+            GF_SECURITY_ADMIN_PASSWORD: abcd@1234
+            GF_SERVER_ROOT_URL: http://localhost
+        volumes:
+            - "/var/monitor/grafana:/var/lib/grafana"
+    cadvisor:
+        image: docker.finogeeks.club/monitor/cadvisor
+        volumes:
+          - /:/rootfs:ro
+          - /var/run:/var/run:rw
+          - /sys:/sys:ro
+          - /var/lib/docker/:/var/lib/docker:ro
+        ports:
+          - "8080:8080"
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"
         ports:
@@ -16,15 +34,6 @@ services:
         image: "docker.finogeeks.club/monitor/openldap_exporter"
         environment:
             LDAP_ADDR: tcp:host=10.135.129.123:port=389
-    grafana:
-        image: "docker.finogeeks.club/monitor/grafana"
-        ports:
-            - "3000:3000"
-        environment:
-            GF_SECURITY_ADMIN_PASSWORD: abcd@1234
-            GF_SERVER_ROOT_URL: http://localhost
-        volumes:
-            - "/var/monitor/grafana:/var/lib/grafana"
     rancher-exporter:
         image: docker.finogeeks.club/monitor/rancher-exporter:v0.22.52
         environment:
@@ -32,12 +41,8 @@ services:
             CATTLE_SECRET_KEY: "Tvu9ghH6dYJGRYjJDEHHqLhHMBXXyShg2GRoaHA3"
             CATTLE_URL: "http://10.135.158.124:8080/v2-beta"
             HIDE_SYS: "true"
-    cadvisor:
-        image: docker.finogeeks.club/monitor/cadvisor
-        volumes:
-          - /:/rootfs:ro
-          - /var/run:/var/run:rw
-          - /sys:/sys:ro
-          - /var/lib/docker/:/var/lib/docker:ro
+    statsd-exporter:
+        image: "docker.finogeeks.club/monitor/statsd-exporter"
         ports:
-          - "8080:8080"
+            - "9102:9102"
+            - "9125:9125/udp"
