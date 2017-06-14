@@ -40,7 +40,7 @@ scrape_configs:
 
   - job_name: 'bots'
     static_configs:
-      - targets: ['10.135.180.220:9093', '10.135.180.120:9094']
+      - targets: ['helper.bot.finogeeks.club:9093', 'helper.bot.finogeeks.com:9094', 'openacc.bot.finogeeks.club:9095', 'openacc.bot.finogeeks.com:9096']
 
   - job_name: 'RCS'
     static_configs:
