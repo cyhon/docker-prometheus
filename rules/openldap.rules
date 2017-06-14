@@ -1,6 +1,6 @@
 
 ALERT OpenLDAPServerStatus
-  IF absent(openldap_up) == 1 or openldap_up == 0
+  IF absent(openldap_up) == 1
   FOR 1m
   ANNOTATIONS {
     summary = "OpenLDAPServerStatus",
