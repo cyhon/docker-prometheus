@@ -45,13 +45,7 @@ scrape_configs:
 
   - job_name: 'bots'
     static_configs:
-      - targets: ['10.135.129.123:9093']
-        labels:
-          domain: 'finogeeks.club'
-
-      - targets: ['10.135.129.123:9094']
-        labels:
-          domain: 'finogeeks.com'
+      - targets: ['10.135.180.220:9093', '10.135.180.120:9094']
 
   - job_name: 'RCS'
     static_configs:
