@@ -1,24 +1,17 @@
-synapse_http_server_requests:method = sum(synapse_http_server_requests) by (domain, method)
-synapse_http_server_requests:servlet = sum(synapse_http_server_requests) by (domain, servlet)
-synapse_http_server_responses:code = sum(synapse_http_server_responses) by (domain, code)
-synapse_http_server_requests:total = sum(synapse_http_server_requests:method) by (domain)
+synapse_http_server_requests:method = sum(synapse_http_server_requests) by (instance, method)
+synapse_http_server_requests:servlet = sum(synapse_http_server_requests) by (instance, servlet)
+synapse_http_server_responses:code = sum(synapse_http_server_responses) by (instance, code)
+synapse_http_server_requests:total = sum(synapse_http_server_requests:method) by (instance)
 
-synapse_http_client_requests:method = sum(synapse_http_client_requests) by (domain, method)
-synapse_http_client_responses:code = sum(synapse_http_client_responses) by (domain, code)
-synapse_http_client_requests:total = sum(synapse_http_client_requests:method) by (domain)
+synapse_http_client_requests:method = sum(synapse_http_client_requests) by (instance, method)
+synapse_http_client_responses:code = sum(synapse_http_client_responses) by (instance, code)
+synapse_http_client_requests:total = sum(synapse_http_client_requests:method) by (instance)
 
 ALERT SynapseHTTPServerQPS
   IF rate(synapse_http_server_requests:total[1m]) > 100
   FOR 5m
   ANNOTATIONS {
-    summary = "{{ $labels.domain }} SynapseHTTPServerQPS",
+    summary = "{{ $labels.instance }} SynapseHTTPServerQPS",
     description = "{{ $labels.instance }} QPS过高(当前值: {{ $value }}req/s)",
   }
 
-ALERT SynapseHTTPClientQPS
-  IF rate(synapse_http_client_requests:total[1m]) > 100
-  FOR 2m
-  ANNOTATIONS {
-    summary = "{{ $labels.domain }} SynapseHTTPCientQPS",
-    description = "{{ $labels.instance }} QPS过高(当前值: {{ $value }}req/s)",
-  }

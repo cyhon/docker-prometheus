@@ -22,6 +22,9 @@ services:
         image: "docker.finogeeks.club/monitor/prometheus"
         ports:
             - "9999:9090"
+        extra_hosts:
+            - "chat.finogeeks.club:10.135.138.50"
+            - "chat.finogeeks.com:10.135.141.191"
     alertmanager:
         image: "docker.finogeeks.club/monitor/alertmanager"
         ports:
@@ -29,7 +32,7 @@ services:
     alert-webhook:
         image: "docker.finogeeks.club/monitor/alert-webhook"
         environment:
-            HOMESERVER_URL: http://10.135.129.123:8008
+            HOMESERVER_URL: http://10.135.138.50:8008
     openldap-exporter:
         image: "docker.finogeeks.club/monitor/openldap_exporter"
         environment:
@@ -39,7 +42,7 @@ services:
         environment:
             CATTLE_ACCESS_KEY: "4F4D2BE02702446C04C2"
             CATTLE_SECRET_KEY: "Tvu9ghH6dYJGRYjJDEHHqLhHMBXXyShg2GRoaHA3"
-            CATTLE_URL: "http://10.135.158.124:8080/v2-beta"
+            CATTLE_URL: "http://10.135.178.5:8080/v2-beta"
             HIDE_SYS: "true"
     statsd-exporter:
         image: "docker.finogeeks.club/monitor/statsd-exporter"

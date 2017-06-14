@@ -1,7 +1,7 @@
 
 ALERT OpenLDAPServerStatus
   IF absent(openldap_up) == 1
-  FOR 1m
+  FOR 2m
   ANNOTATIONS {
     summary = "OpenLDAPServerStatus",
     description = "监控数据断流，请检查服务是否正常!",
