@@ -1,7 +1,7 @@
 FROM docker.finogeeks.club/base/ubuntu
 
 MAINTAINER "linhaitao@finogeeks.com"
-ENV VERSION 1.6.3
+ENV VERSION 1.7.1
 
 
 RUN export https_proxy=http://10.135.186.25:3128 \
@@ -13,15 +13,14 @@ RUN export https_proxy=http://10.135.186.25:3128 \
     && rm -rf /var/lib/apt/lists/* && rm -f prometheus-${VERSION}.linux-amd64.tar.gz \
     && unset https_proxy
 
+ADD entrypoint.sh /prometheus/entrypoint.sh
 ADD consoles /prometheus/consoles/
+ADD conf /prometheus/conf/
 ADD rules /prometheus/rules/
-ADD prometheus.yml /prometheus/
+
+ENV CONFIG_FILE "prometheus.yml"
+ENV ALERTMANAGER "http://alertmanager:9093"
 
 EXPOSE     9090
 WORKDIR    /prometheus
-ENTRYPOINT [ "/prometheus/prometheus" ]
-CMD        [ "-config.file=/prometheus/prometheus.yml", \
-			 "-alertmanager.url=http://alertmanager:9093", \
-             "-storage.local.path=/prometheus/data", \
-             "-web.console.libraries=/prometheus/console_libraries", \
-             "-web.console.templates=/prometheus/consoles" ]
+ENTRYPOINT [ "/prometheus/entrypoint.sh" ]

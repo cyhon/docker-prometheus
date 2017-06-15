@@ -11,16 +11,17 @@ services:
           - "8080:8080"
     node-exporter:
         image: docker.finogeeks.club/monitor/node-exporter
+        network_mode: "host"
+        privileged: true
+        pid: host
         volumes:
-          - /proc:/host/proc
-          - /sys:/host/sys
-          - /:/rootfs
+          - /proc:/host/proc:ro
+          - /sys:/host/sys:ro
+          - /:/rootfs:ro
         command:
           - '-collector.procfs=/host/proc'
           - '-collector.sysfs=/host/sysfs'
           - '-collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
-        ports:
-          - "9100:9100"
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"
         ports:
