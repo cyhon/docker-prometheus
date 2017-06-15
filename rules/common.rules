@@ -1,8 +1,8 @@
 
 ALERT ServiceStatus
   IF up == 0
-  FOR 2m
+  FOR 5m
   ANNOTATIONS {
     summary = "服务状态监控",
-    description = "{{ $labels.job }}: {{ $labels.instance }} 服务状态异常超过2分钟!",
+    description = "{{ $labels.job }}: {{ $labels.instance }} 服务状态异常超过5分钟!",
   }
