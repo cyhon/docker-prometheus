@@ -20,7 +20,7 @@ services:
           - /:/rootfs:ro
         command:
           - '-collector.procfs=/host/proc'
-          - '-collector.sysfs=/host/sysfs'
+          - '-collector.sysfs=/host/sys'
           - '-collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"
