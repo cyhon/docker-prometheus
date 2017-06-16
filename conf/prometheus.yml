@@ -12,6 +12,8 @@ global:
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
     - "/prometheus/rules/common.rules"
+    - "/prometheus/rules/synapse.rules"
+    - "/prometheus/rules/openldap.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
@@ -24,3 +26,41 @@ scrape_configs:
 
     static_configs:
       - targets: ['localhost:9090']
+
+  - job_name: 'synapse'
+    metrics_path: "/_synapse/metrics"
+    static_configs:
+      - targets: ['chat.finogeeks.club:9092', 'chat.finogeeks.com:9092']
+
+  - job_name: 'openldap'
+    static_configs:
+      - targets: ['openldap-exporter:8080']
+        labels:
+          domain: 'finogeeks.club'
+
+  - job_name: 'bots'
+    static_configs:
+      - targets: ['helper.bot.finogeeks.club:9093', 'helper.bot.finogeeks.com:9094', 'openacc.bot.finogeeks.club:9095', 'openacc.bot.finogeeks.com:9096']
+
+#  - job_name: 'RCS'
+#    static_configs:
+#      - targets: ['10.135.180.120:9093']
+
+  - job_name: 'rancher'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['rancher-exporter:9173']
+
+  - job_name: 'cAdvisor'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['10.135.129.123:55555', '10.135.180.220:55555', '10.135.138.50:55555']
+
+  - job_name: 'machine'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['10.135.129.123:55556', '10.135.180.220:55556', '10.135.138.50:55556']
+
+  - job_name: 'statsd'
+    static_configs:
+      - targets: ['statsd-exporter:9102']
