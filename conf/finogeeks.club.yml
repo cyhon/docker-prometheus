@@ -1,0 +1,66 @@
+# my global config
+global:
+  scrape_interval:     30s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 30s # Evaluate rules every 15 seconds. The default is every 1 minute.
+#  scrape_timeout:       5s # scrape_timeout is set to the global default (10s).
+
+  # Attach these labels to any time series or alerts when communicating with
+  # external systems (federation, remote storage, Alertmanager).
+  external_labels:
+      monitor: 'codelab-monitor'
+
+# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+rule_files:
+    - "/prometheus/rules/common.rules"
+    - "/prometheus/rules/synapse.rules"
+    - "/prometheus/rules/openldap.rules"
+
+# A scrape configuration containing exactly one endpoint to scrape:
+# Here it's Prometheus itself.
+scrape_configs:
+  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
+  - job_name: 'prometheus'
+
+    # metrics_path defaults to '/metrics'
+    # scheme defaults to 'http'.
+
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'synapse'
+    metrics_path: "/_synapse/metrics"
+    static_configs:
+      - targets: ['staff-server.FinoOA:9092']
+
+  - job_name: 'openldap'
+    static_configs:
+      - targets: ['openldap-exporter:8080']
+        labels:
+          domain: 'finogeeks.club'
+
+  - job_name: 'bots'
+    static_configs:
+      - targets: ['bot-xiaoji.bot-center:9092', 'bot-openaccount.bot-center:9092']
+
+#  - job_name: 'RCS'
+#    static_configs:
+#      - targets: ['10.135.180.120:9093']
+
+  - job_name: 'rancher'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['rancher-exporter:9173']
+
+  - job_name: 'cAdvisor'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['monitor-cadvisor-1:8080', 'monitor-cadvisor-2:8080', 'monitor-cadvisor-3:8080']
+
+  - job_name: 'machine'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['monitor-node-export-1:9100', 'monitor-node-export-2:9100', 'monitor-node-export-3:9100']
+
+#  - job_name: 'statsd'
+#    static_configs:
+#      - targets: ['statsd-exporter:9102']
