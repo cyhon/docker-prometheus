@@ -11,7 +11,6 @@ services:
           - "8080:8080"
     node-exporter:
         image: docker.finogeeks.club/monitor/node-exporter
-        network_mode: "host"
         privileged: true
         pid: host
         volumes:
