@@ -42,14 +42,9 @@ scrape_configs:
     static_configs:
       - targets: ['home-helper.finochat:9092', 'bot-openaccount.finochat:9092']
 
-#  - job_name: 'RCS'
-#    static_configs:
-#      - targets: ['10.135.180.120:9093']
-
-  - job_name: 'rancher'
-    scrape_interval: 1m
+  - job_name: 'RCS'
     static_configs:
-      - targets: ['rancher-exporter:9173']
+      - targets: ['rcs-server.finochat:9092']
 
   - job_name: 'cAdvisor'
     scrape_interval: 1m
