@@ -66,5 +66,6 @@ scrape_configs:
 #      - targets: ['statsd-exporter:9102']
 
   - job_name: 'nginx'
+    scrape_interval: 1m
     static_configs:
       - targets: ['10.135.135.206:9092']
