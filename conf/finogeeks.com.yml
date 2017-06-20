@@ -42,9 +42,9 @@ scrape_configs:
     static_configs:
       - targets: ['home-helper.finochat:9092', 'bot-openaccount.finochat:9092']
 
-  - job_name: 'RCS'
+  - job_name: 'HTTP Service'
     static_configs:
-      - targets: ['rcs-server.finochat:9092']
+      - targets: ['rcs-server.finochat:9092', 'identity-server.finochat:9092']
 
   - job_name: 'cAdvisor'
     scrape_interval: 1m

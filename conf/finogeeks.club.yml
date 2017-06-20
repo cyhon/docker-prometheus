@@ -42,9 +42,9 @@ scrape_configs:
     static_configs:
       - targets: ['bot-xiaoji.bot-center:9092', 'bot-openaccount.bot-center:9092']
 
-  - job_name: 'RCS'
+  - job_name: 'HTTP Service'
     static_configs:
-      - targets: ['rcs-server.FinoOA:9092']
+      - targets: ['rcs-server.FinoOA:9092', 'identity-server.FinoOA:9092']
 
   - job_name: 'rancher'
     scrape_interval: 1m
