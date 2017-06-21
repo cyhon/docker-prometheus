@@ -11,9 +11,7 @@ global:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-    - "/prometheus/rules/common.rules"
-    - "/prometheus/rules/synapse.rules"
-    - "/prometheus/rules/openldap.rules"
+    - "/prometheus/rules/synapse.rules.bak"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
