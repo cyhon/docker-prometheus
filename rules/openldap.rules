@@ -4,5 +4,5 @@ ALERT OpenLDAPServerStatus
   FOR 1m
   ANNOTATIONS {
     summary = "OpenLDAPServerStatus",
-    description = "{{ labels.domain }}监控数据断流，请检查服务是否正常!",
+    description = "{{ labels.instance }}监控数据断流，请检查服务是否正常!",
   }

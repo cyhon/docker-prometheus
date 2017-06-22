@@ -32,6 +32,10 @@ scrape_configs:
     static_configs:
       - targets: ['staff-server.FinoOA:9092']
 
+  - job_name: 'sygnal'
+    static_configs:
+      - targets: ['pusher.finogeeks.club:5000']
+
   - job_name: 'openldap'
     static_configs:
       - targets: ['openldap-exporter:8080']
