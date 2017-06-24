@@ -48,7 +48,7 @@ scrape_configs:
 
   - job_name: 'HTTP Service'
     static_configs:
-      - targets: ['rcs-server.FinoOA:9092', 'identity-server.FinoOA:9092']
+      - targets: ['rcs-server.auth:9092', 'identity-server.auth:9092']
 
   - job_name: 'rancher'
     scrape_interval: 1m
