@@ -1,3 +1,4 @@
+[![Build Status](https://ci.finogeeks.club/api/badges/monitor/prometheus/status.svg)](https://ci.finogeeks.club/monitor/prometheus)
 # Prometheus监控接入
 
 ## 数据模型
