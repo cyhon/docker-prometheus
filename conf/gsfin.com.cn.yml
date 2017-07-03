@@ -51,3 +51,8 @@ scrape_configs:
     scrape_interval: 1m
     static_configs:
       - targets: ['monitor-node-exporter-1:9100', 'monitor-node-exporter-2:9100']
+
+  - job_name: 'nginx'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['proxy.finochat:9092']
