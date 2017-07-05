@@ -8,9 +8,9 @@ ALERT ServiceStatus
   }
 
 ALERT APIProberStatus
-  IF prober_http_status == 0
+  IF prober_http_status != 0
   FOR 2m
   ANNOTATIONS {
     summary = "API探测",
-    description = "{{ $labels.service }} - {{ $labels.api }}, status={{ $value }}!",
+    description = "{{ $labels.service }} - {{ $labels.api }}, status={{ $value }}",
   }
