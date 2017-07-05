@@ -73,3 +73,8 @@ scrape_configs:
     scrape_interval: 1m
     static_configs:
       - targets: ['10.135.135.206:9092']
+
+  - job_name: 'api-prober'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['api-prober:9092']

@@ -40,6 +40,7 @@ services:
         image: "docker.finogeeks.club/monitor/alert-webhook"
         environment:
             HOMESERVER_URL: http://10.135.138.50:8008
+            DEPLOY_ENV: test
     openldap-exporter:
         image: "docker.finogeeks.club/monitor/openldap_exporter"
         environment:
@@ -56,3 +57,7 @@ services:
         ports:
             - "9102:9102"
             - "9125:9125/udp"
+    api-prober:
+        image: "docker.finogeeks.club/monitor/api-prober"
+        environment:
+            ENABLE_MONITOR: 'true'

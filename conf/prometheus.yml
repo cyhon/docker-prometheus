@@ -12,6 +12,7 @@ global:
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
     - "/prometheus/rules/synapse.rules.bak"
+    - "/prometheus/rules/common.rules"
 
 # A scrape configuration containing exactly one endpoint to scrape:
 # Here it's Prometheus itself.
@@ -62,3 +63,8 @@ scrape_configs:
   - job_name: 'statsd'
     static_configs:
       - targets: ['statsd-exporter:9102']
+
+  - job_name: 'api-prober'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['api-prober:9092']
