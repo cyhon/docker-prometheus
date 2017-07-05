@@ -58,12 +58,12 @@ scrape_configs:
   - job_name: 'cAdvisor'
     scrape_interval: 1m
     static_configs:
-      - targets: ['monitor-cadvisor-1:8080', 'monitor-cadvisor-2:8080', 'monitor-cadvisor-3:8080']
+      - targets: ['monitor-cadvisor-1:8080', 'monitor-cadvisor-2:8080', 'monitor-cadvisor-3:8080', 'monitor-cadvisor-4:8080', 'monitor-cadvisor-5:8080', 'monitor-cadvisor-6:8080']
 
   - job_name: 'machine'
     scrape_interval: 1m
     static_configs:
-      - targets: ['monitor-node-exporter-1:9100', 'monitor-node-exporter-2:9100', 'monitor-node-exporter-3:9100']
+      - targets: ['monitor-node-exporter-1:9100', 'monitor-node-exporter-2:9100', 'monitor-node-exporter-3:9100', 'monitor-node-exporter-4:9100', 'monitor-node-exporter-5:9100', 'monitor-node-exporter-6:9100']
 
 #  - job_name: 'statsd'
 #    static_configs:
