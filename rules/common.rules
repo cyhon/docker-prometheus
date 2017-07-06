@@ -3,14 +3,14 @@ ALERT ServiceStatus
   IF up == 0
   FOR 2m
   ANNOTATIONS {
-    summary = "服务状态监控",
-    description = "{{ $labels.job }}: {{ $labels.instance }} 服务状态异常超过2分钟!",
+    summary = "{{ $labels.job }} 服务状态监控",
+    description = "{{ $labels.instance }} 状态异常超过2分钟!",
   }
 
 ALERT APIProberStatus
   IF prober_http_status != 0
   FOR 2m
   ANNOTATIONS {
-    summary = "API探测",
-    description = "{{ $labels.service }} - {{ $labels.api }}, status={{ $value }}",
+    summary = "{{ $labels.service }} API探测",
+    description = "{{ $labels.api }}, status = {{ $value }}",
   }

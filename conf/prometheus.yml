@@ -37,19 +37,6 @@ scrape_configs:
         labels:
           domain: 'finogeeks.club'
 
-  - job_name: 'bots'
-    static_configs:
-      - targets: ['helper.bot.finogeeks.club:9093', 'helper.bot.finogeeks.com:9094', 'openacc.bot.finogeeks.club:9095', 'openacc.bot.finogeeks.com:9096']
-
-  - job_name: 'RCS'
-    static_configs:
-      - targets: ['10.135.180.120:9093']
-
-  - job_name: 'rancher'
-    scrape_interval: 1m
-    static_configs:
-      - targets: ['rancher-exporter:9173']
-
   - job_name: 'cAdvisor'
     scrape_interval: 1m
     static_configs:
