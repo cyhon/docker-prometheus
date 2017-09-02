@@ -61,3 +61,12 @@ scrape_configs:
     scrape_interval: 1m
     static_configs:
       - targets: ['api-prober:9092']
+
+  - job_name: 'netdata'
+    scrape_interval: 1m
+    metrics_path: '/api/v1/allmetrics'
+    params:
+      format: [prometheus]
+    honor_labels: true
+    static_configs:
+      - targets: ['netdata:19999']
