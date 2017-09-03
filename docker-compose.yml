@@ -13,7 +13,7 @@ services:
         ports:
           - "8080:8080"
     netdata:
-        image: firehol/netdata:v1.7.0
+        image: docker.finogeeks.club/monitor/netdata
         privileged: true
         pid: host
         volumes:
