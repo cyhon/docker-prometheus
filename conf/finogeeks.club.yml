@@ -76,7 +76,6 @@ scrape_configs:
     metrics_path: '/api/v1/allmetrics'
     params:
       format: [prometheus]
-    honor_labels: true
     - names:
       - netdata
       type: 'A'
