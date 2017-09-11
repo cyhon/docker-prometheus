@@ -66,7 +66,7 @@ scrape_configs:
 #    static_configs:
 #      - targets: ['statsd-exporter:9102']
 
-  - job_name: 'api-prober'
-    scrape_interval: 1m
-    static_configs:
-      - targets: ['api-prober:9092']
+#  - job_name: 'api-prober'
+#    scrape_interval: 1m
+#    static_configs:
+#      - targets: ['api-prober:9092']
