@@ -40,7 +40,7 @@ scrape_configs:
 
   - job_name: 'HTTP Service'
     static_configs:
-      - targets: ['rcs-server.auth:9092', 'identity-server.auth:9092']
+      - targets: ['bot.UAC:9092', 'rcskt.UAC:9092']
 
   - job_name: 'cAdvisor'
     scrape_interval: 1m
