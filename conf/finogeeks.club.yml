@@ -42,9 +42,9 @@ scrape_configs:
         labels:
           domain: 'finogeeks.club'
 
-  - job_name: 'bots'
-    static_configs:
-      - targets: ['bot-xiaoji.bot-center:9092', 'bot-openaccount.bot-center:9092']
+#  - job_name: 'bots'
+#    static_configs:
+#      - targets: ['bot-xiaoji.bot-center:9092', 'bot-openaccount.bot-center:9092']
 
   - job_name: 'HTTP Service'
     static_configs:
