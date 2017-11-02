@@ -52,7 +52,7 @@ scrape_configs:
     - names:
       - cAdvisor
       type: 'A'
-      port: 8080
+      port: 18080
 
   - job_name: 'machine'
     scrape_interval: 1m
