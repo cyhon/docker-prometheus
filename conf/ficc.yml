@@ -40,3 +40,10 @@ scrape_configs:
       - node-exporter
       type: 'A'
       port: 9100
+  - job_name: 'bus'
+    scrape_interval: 1m
+    dns_sd_configs:
+    - names:
+      - prometheus-nats-exporter
+      type: 'A'
+      port: 7777
