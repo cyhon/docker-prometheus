@@ -1,0 +1,9 @@
+groups:
+- name: openldap.rules
+  rules:
+  - alert: OpenLDAPServerStatus
+    expr: openldap_up == 0
+    for: 1m
+    annotations:
+      description: 监控数据断流，请检查服务是否正常!
+      summary: OpenLDAPServerStatus

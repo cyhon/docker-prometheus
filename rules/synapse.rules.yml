@@ -1,0 +1,23 @@
+groups:
+- name: synapse.rules
+  rules:
+  - record: synapse_http_server_requests:method
+    expr: sum(synapse_http_server_requests) BY (instance, method)
+  - record: synapse_http_server_requests:servlet
+    expr: sum(synapse_http_server_requests) BY (instance, servlet)
+  - record: synapse_http_server_responses:code
+    expr: sum(synapse_http_server_responses) BY (instance, code)
+  - record: synapse_http_server_requests:total
+    expr: sum(synapse_http_server_requests:method) BY (instance)
+  - record: synapse_http_client_requests:method
+    expr: sum(synapse_http_client_requests) BY (instance, method)
+  - record: synapse_http_client_responses:code
+    expr: sum(synapse_http_client_responses) BY (instance, code)
+  - record: synapse_http_client_requests:total
+    expr: sum(synapse_http_client_requests:method) BY (instance)
+  - alert: SynapseHTTPServerQPS
+    expr: rate(synapse_http_server_requests:total[1m]) > 100
+    for: 5m
+    annotations:
+      description: '{{ $labels.instance }} QPS过高(当前值: {{ $value }}req/s)'
+      summary: '{{ $labels.instance }} SynapseHTTPServerQPS'
