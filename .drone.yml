@@ -5,3 +5,11 @@ publish:
     when:
       branch: master
       event: [push, pull_request]
+
+  docker:
+    repo: monitor/prometheus
+    file: Dockerfile
+    tag:
+      - "$$TAG"
+    when:
+      event: event
