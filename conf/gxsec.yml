@@ -40,7 +40,7 @@ scrape_configs:
 
   - job_name: 'HTTP Service'
     static_configs:
-      - targets: ['auth-center.finochat:9092','uac-server.finochat:9092','rcs-server.finochat:9092']
+      - targets: ['auth-center.finochat:9092','uac-server.finochat:9092','rcs-server.finochat:9092','login-provider.account-adapter:9092']
 
   - job_name: 'cAdvisor'
     scrape_interval: 1m
