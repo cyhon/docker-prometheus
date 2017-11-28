@@ -47,3 +47,10 @@ scrape_configs:
       - prometheus-nats-exporter
       type: 'A'
       port: 7777
+- job_name: 'plasmon'
+    scrape_interval: 5s
+    dns_sd_configs:
+    - names:
+      - plasmon-agent
+      type: 'A'
+      port: 9092
