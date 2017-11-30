@@ -8,5 +8,6 @@ ADD entrypoint.sh /prometheus/entrypoint.sh
 
 ENV CONFIG_FILE "prometheus.yml"
 
+USER root
 WORKDIR    /prometheus
 ENTRYPOINT [ "/prometheus/entrypoint.sh" ]
