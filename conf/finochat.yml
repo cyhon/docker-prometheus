@@ -11,8 +11,10 @@ global:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-    - "/prometheus/rules/synapse.rules.yml"
-    - "/prometheus/rules/openldap.rules.yml"
+    - "/prometheus/rules/docker_host.rules.yml"
+    - "/prometheus/rules/service_status.rules.yml"
+    - "/prometheus/rules/api_prober.rules.yml"
+    - "/prometheus/rules/nodejs_express.rules.yml"
 
 alerting:
   alertmanagers:
@@ -41,7 +43,12 @@ scrape_configs:
     static_configs:
       - targets: ['auth-center.finochat:9092','uac-server.finochat:9092','rcs-server.finochat:9092','login-provider.account-adapter:9092','ref-server.knowledge:8000']
 
-  - job_name: 'cAdvisor'
+  - job_name: 'platform-api'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['platform-api.finochat:9092']
+
+  - job_name: 'container'
     scrape_interval: 1m
     dns_sd_configs:
     - names:
@@ -49,7 +56,7 @@ scrape_configs:
       type: 'A'
       port: 18080
 
-  - job_name: 'machine'
+  - job_name: 'docker_host'
     scrape_interval: 1m
     dns_sd_configs:
     - names:
