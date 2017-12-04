@@ -14,6 +14,7 @@ rule_files:
     - "/prometheus/rules/docker_host.rules.yml"
     - "/prometheus/rules/service_status.rules.yml"
     - "/prometheus/rules/api_prober.rules.yml"
+    - "/prometheus/rules/nodejs_express.rules.yml"
 
 alerting:
   alertmanagers:
@@ -61,5 +62,11 @@ scrape_configs:
       port: 9100
 
   - job_name: 'api-prober'
+    scrape_interval: 1m
     static_configs:
       - targets: ['api-prober:9092']
+
+  - job_name: 'platform-api'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['platform-api:9092']

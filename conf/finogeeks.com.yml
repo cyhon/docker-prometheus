@@ -11,7 +11,6 @@ global:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
-    - "/prometheus/rules/common.rules.yml"
     - "/prometheus/rules/synapse.rules.yml"
     - "/prometheus/rules/openldap.rules.yml"
 

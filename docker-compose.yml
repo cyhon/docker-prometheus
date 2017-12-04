@@ -19,8 +19,13 @@ services:
         image: docker.finogeeks.club/monitor/api-prober
         environment:
             env: finogeeks
-            API_HOST: https://www.baidu.com
             ENABLE_MONITOR: 'true'
+    platform-api:
+        image: "docker.finogeeks.club/finochat/platform-api"
+        environment:
+            ENABLE_MONITOR: 'true'
+        ports:
+          - 13000:3000
 
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"
