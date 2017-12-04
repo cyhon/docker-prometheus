@@ -1,0 +1,27 @@
+groups:
+- name: host.rules
+  rules:
+  - record: cpu_usage_not_idle:rate5m
+    expr: round(sum(rate(node_cpu{mode!="idle"}[5m]) * 100) by (job, instance) / count(node_cpu{mode='system'}) by (job, instance))
+  - record: mem_usage
+    expr: round((node_memory_MemTotal - node_memory_MemFree - node_memory_Buffers - node_memory_Cached) / node_memory_MemTotal * 100)
+  - record: disk_usage
+    expr: round(100 - 100 * sum(node_filesystem_free{device=~'/dev/.*'}) by (job, instance, device) / sum(node_filesystem_size{device=~'/dev/.*'}) by (job, instance, device))
+  - alert: CPU使用率
+    expr: cpu_usage_not_idle:rate5m >= 90
+    for: 5m
+    annotations:
+      description: '当前值 {{ $value }}%'
+      summary: '{{ $labels.instance }} CPU使用率过高'
+  - alert: MEM使用率
+    expr: mem_usage >= 90
+    for: 5m
+    annotations:
+      description: '当前值 {{ $value }}%'
+      summary: '{{ $labels.instance }} MEM使用率过高'
+  - alert: DISK使用率
+    expr: disk_usage >= 90
+    for: 5m
+    annotations:
+      description: '{{ $labels.device }}当前值 {{ $value }}%'
+      summary: '{{ $labels.instance }} DISK使用率过高'

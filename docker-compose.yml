@@ -11,12 +11,14 @@ services:
         image: docker.finogeeks.club/monitor/node-exporter
         privileged: true
         pid: host
-        volumes:
-          - /proc:/host/proc:ro
-          - /sys:/host/sys:ro
-          - /:/rootfs:ro
+#        volumes:
+#          - /proc:/host/proc:ro
+#          - /sys:/host/sys:ro
+#          - /:/rootfs:ro
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"
+        environment:
+          CONFIG_FILE: prometheus.yml
         ports:
           - 9999:9090
     alertmanager:
@@ -25,4 +27,6 @@ services:
         image: "docker.finogeeks.club/monitor/alert-webhook"
         environment:
             HOMESERVER_URL: https://chat.finogeeks.club
+            USERID: "@alarm-bot:finogeeks.club"
+            PASSWD: "fino@@123321"
             DEPLOY_ENV: test
