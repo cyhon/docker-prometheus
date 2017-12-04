@@ -15,6 +15,13 @@ services:
 #          - /proc:/host/proc:ro
 #          - /sys:/host/sys:ro
 #          - /:/rootfs:ro
+    api-prober:
+        image: docker.finogeeks.club/monitor/api-prober
+        environment:
+            env: finogeeks
+            API_HOST: https://www.baidu.com
+            ENABLE_MONITOR: 'true'
+
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"
         environment:

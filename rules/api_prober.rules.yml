@@ -1,0 +1,15 @@
+groups:
+- name: APIProber.rules
+  rules:
+  - alert: API探测状态
+    expr: prober_http_status < 200 or prober_http_status >= 400
+    for: 2m
+    annotations:
+      description: '{{ $labels.api }}, status = {{ $value }}'
+      summary: '{{ $labels.service }} API探测'
+  - alert: API探测延时
+    expr: prober_http_duration_seconds >= 2
+    for: 3m
+    annotations:
+      description: '{{ $labels.api }}, duration = {{ $value }}s'
+      summary: '{{ $labels.service }} API探测'

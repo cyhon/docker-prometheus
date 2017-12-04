@@ -13,6 +13,7 @@ global:
 rule_files:
     - "/prometheus/rules/docker_host.rules.yml"
     - "/prometheus/rules/service_status.rules.yml"
+    - "/prometheus/rules/api_prober.rules.yml"
     - "/prometheus/rules/synapse.rules.yml"
     - "/prometheus/rules/openldap.rules.yml"
 
