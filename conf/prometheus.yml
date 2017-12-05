@@ -13,6 +13,7 @@ global:
 rule_files:
     - "/prometheus/rules/homeserver.rules.yml"
     - "/prometheus/rules/docker_host.rules.yml"
+    - "/prometheus/rules/container.rules.yml"
     - "/prometheus/rules/service_status.rules.yml"
     - "/prometheus/rules/api_prober.rules.yml"
     - "/prometheus/rules/nodejs_express.rules.yml"
@@ -53,7 +54,7 @@ scrape_configs:
     - names:
       - cAdvisor
       type: 'A'
-      port: 8080
+      port: 18080
 
   - job_name: 'docker_host'
     scrape_interval: 1m

@@ -1,0 +1,11 @@
+groups:
+- name: container.rules
+  rules:
+  - record: container_cpu_usage:rate5m
+    expr: round(sum(rate(container_cpu_usage_seconds_total{name=~".+"}[5m])) by (job, instance, name) * 100)
+  - alert: 容器CPU使用率
+    expr: container_cpu_usage:rate5m >= 90
+    for: 5m
+    annotations:
+      description: '当前值 {{ $value }}%'
+      summary: '{{ $labels.instance }}/{{ $labels.name }} CPU使用率过高'

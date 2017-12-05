@@ -2,6 +2,7 @@ version: '2'
 services:
     cAdvisor:
         image: docker.finogeeks.club/monitor/cadvisor
+        pid: host
         volumes:
           - /:/rootfs:ro
           - /var/run:/var/run:rw
