@@ -2,16 +2,16 @@ groups:
 - name: NodejsExpress.rules
   rules:
   - record: nodejs_error_rate:rate5m
-    expr: sum(rate(http_request_duration_seconds_count{code=~'4.*|5.*'}[5m])) by (job, instance)/sum(rate(http_request_duration_seconds_count[5m])) by (job, instance) * 100
+    expr: sum(rate(http_request_duration_seconds_count{code=~'1.*|4.*|5.*'}[5m])) by (job, instance)/sum(rate(http_request_duration_seconds_count[5m])) by (job, instance) * 100
   - record: nodejs_duration:tp90
     expr: max(http_request_duration_seconds{quantile="0.9"}) by (job, instance)
-  - alert: Nodejs Express HTTP服务
+  - alert: RESTful HTTP服务
     expr: nodejs_error_rate:rate5m > 1
     for: 2m
     annotations:
       description: '当前错误率 {{ $value }}%'
       summary: '{{ $labels.instance }} API接口错误率过高'
-  - alert: Nodejs Express HTTP服务
+  - alert: RESTful HTTP服务
     expr: nodejs_duration:tp90 >= 2
     for: 3m
     annotations:

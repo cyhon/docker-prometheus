@@ -15,6 +15,7 @@ rule_files:
     - "/prometheus/rules/service_status.rules.yml"
     - "/prometheus/rules/api_prober.rules.yml"
     - "/prometheus/rules/nodejs_express.rules.yml"
+    - "/prometheus/rules/kotlin_vertx.rules.yml"
 
 alerting:
   alertmanagers:

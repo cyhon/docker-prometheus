@@ -1,0 +1,19 @@
+groups:
+- name: NodejsExpress.rules
+  rules:
+  - record: vertx_error_rate:rate5m
+    expr: sum((rate(vertx_http_servers_0_0_0_0:8080_responses_1xx_total[5m]) + rate(vertx_http_servers_0_0_0_0:8080_responses_4xx_total[5m]) + rate(vertx_http_servers_0_0_0_0:8080_responses_5xx_total[5m])) / (rate(vertx_http_servers_0_0_0_0:8080_responses_1xx_total[5m]) + rate(vertx_http_servers_0_0_0_0:8080_responses_2xx_total[5m]) + rate(vertx_http_servers_0_0_0_0:8080_responses_3xx_total[5m]) + rate(vertx_http_servers_0_0_0_0:8080_responses_4xx_total[5m]) + rate(vertx_http_servers_0_0_0_0:8080_responses_5xx_total[5m]))) by (job, instance) * 100
+  - record: vertx_duration:tp95
+    expr: max(vertx_http_servers_0_0_0_0:8080_requests{quantile="0.95"}) by (job, instance)
+  - alert: RESTful HTTP服务
+    expr: vertx_error_rate:rate5m > 1
+    for: 2m
+    annotations:
+      description: '当前错误率 {{ $value }}%'
+      summary: '{{ $labels.instance }} API接口错误率过高'
+  - alert: RESTful HTTP服务
+    expr: vertx_duration:tp95 >= 2
+    for: 3m
+    annotations:
+      description: '当前值 {{ $value }}秒'
+      summary: '{{ $labels.instance }} TP95延时过高'

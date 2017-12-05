@@ -26,6 +26,16 @@ services:
             ENABLE_MONITOR: 'true'
         ports:
           - 13000:3000
+    rcs-server:
+        image: docker.finogeeks.club/finochat/rcs-server
+        environment:
+            ENABLE_MONITOR: 'true'
+            mongo.db: rcs
+            mongo.cluster.domain: mongo
+        ports:
+          - 28080:8080
+    mongo:
+        image: docker.finogeeks.club/base/mongo:3.4
 
     prometheus:
         image: "docker.finogeeks.club/monitor/prometheus"

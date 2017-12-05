@@ -15,6 +15,7 @@ rule_files:
     - "/prometheus/rules/service_status.rules.yml"
     - "/prometheus/rules/api_prober.rules.yml"
     - "/prometheus/rules/nodejs_express.rules.yml"
+    - "/prometheus/rules/kotlin_vertx.rules.yml"
 
 alerting:
   alertmanagers:
@@ -70,3 +71,8 @@ scrape_configs:
     scrape_interval: 1m
     static_configs:
       - targets: ['platform-api:9092']
+
+  - job_name: 'rcs-server'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['rcs-server:9092']
