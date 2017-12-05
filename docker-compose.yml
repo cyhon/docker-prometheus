@@ -53,3 +53,13 @@ services:
             USERID: "@alarm-bot:finogeeks.club"
             PASSWD: "fino@@123321"
             DEPLOY_ENV: test
+    gateway:
+        image: "docker.finogeeks.club/finochat/gateway"
+        privileged: true
+        command: kong start --run-migrations
+        ports:
+          - 8000:8000
+        environment:
+          - KONG_DATABASE=postgres
+          - KONG_PG_HOST=10.135.179.195
+          - KONG_PG_PASSWORD=123123

@@ -1,0 +1,9 @@
+groups:
+- name: nginx.rules
+  rules:
+  - alert: Nginx Gateway 服务
+    expr: rate(nginx_metric_errors_total[5m]) > 0
+    for: 3m
+    annotations:
+      description: '频率 {{ $value }}每秒'
+      summary: '{{ $labels.instance }} 出现错误'

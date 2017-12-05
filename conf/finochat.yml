@@ -12,6 +12,7 @@ global:
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
     - "/prometheus/rules/homeserver.rules.yml"
+    - "/prometheus/rules/nginx_gateway.rules.yml"
     - "/prometheus/rules/docker_host.rules.yml"
     - "/prometheus/rules/container.rules.yml"
     - "/prometheus/rules/service_status.rules.yml"
@@ -41,6 +42,11 @@ scrape_configs:
     metrics_path: "/_synapse/metrics"
     static_configs:
       - targets: ['staff-server.finochat:9092','retail-server.finochat:9092']
+
+  - job_name: 'gateway'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['gateway.finochat:9092']
 
   - job_name: 'Platform HTTP Service'
     static_configs:
