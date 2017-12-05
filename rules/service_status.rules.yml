@@ -1,7 +1,7 @@
 groups:
 - name: ServiceStatus.rules
   rules:
-  - alert: 服务可用性监控
+  - alert: 服务可用性
     expr: up == 0
     for: 2m
     annotations:

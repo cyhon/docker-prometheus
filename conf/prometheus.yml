@@ -11,6 +11,7 @@ global:
 
 # Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
 rule_files:
+    - "/prometheus/rules/homeserver.rules.yml"
     - "/prometheus/rules/docker_host.rules.yml"
     - "/prometheus/rules/service_status.rules.yml"
     - "/prometheus/rules/api_prober.rules.yml"
@@ -35,11 +36,11 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-#  - job_name: 'synapse'
-#    metrics_path: "/_synapse/metrics"
-#    static_configs:
-#      - targets: ['chat.finogeeks.club:9092']
-#
+  - job_name: 'homeserver'
+    metrics_path: "/_synapse/metrics"
+    static_configs:
+      - targets: ['10.135.138.50:9092']
+
 #  - job_name: 'openldap'
 #    static_configs:
 #      - targets: ['openldap-exporter:8080']

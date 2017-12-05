@@ -1,0 +1,27 @@
+groups:
+- name: homeserver.rules
+  rules:
+  - record: homeserver_cpu_usage:rate5m
+    expr: round(rate(process_cpu_seconds_total{job="homeserver"}[5m]) * 100)
+  - record: homeserver_mem_usage
+    expr: round(process_psutil_rss:max{job="homeserver"}/process_psutil_rss:total{job="homeserver"} * 100)
+  - record: homeserver_response_duration
+    expr: round(sum(rate(synapse_http_server_response_time:total[5m])) by (job, instance, servlet) / sum(rate(synapse_http_server_response_time:count[5m])) by (job, instance, servlet))
+  - alert: Homeserver CPU使用率
+    expr: homeserver_cpu_usage:rate5m >= 90
+    for: 5m
+    annotations:
+      description: '当前值 {{ $value }}%'
+      summary: '{{ $labels.instance }} CPU使用率过高'
+  - alert: Homeserver MEM使用率
+    expr: homeserver_mem_usage >= 90
+    for: 5m
+    annotations:
+      description: '当前值 {{ $value }}%'
+      summary: '{{ $labels.instance }} MEM使用率过高'
+  - alert: HTTP Servlet延时
+    expr: homeserver_response_duration{servlet!='SyncRestServlet'} >= 10000 or homeserver_response_duration{servlet='SyncRestServlet'} >= 30000
+    for: 3m
+    annotations:
+      description: '当前值 {{ $value }} 毫秒'
+      summary: '{{ $labels.instance }} {{ $labels.servlet}} 请求延时过高'

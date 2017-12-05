@@ -15,9 +15,3 @@ groups:
     expr: sum(synapse_http_client_responses) BY (instance, code)
   - record: synapse_http_client_requests:total
     expr: sum(synapse_http_client_requests:method) BY (instance)
-  - alert: SynapseHTTPServerQPS
-    expr: rate(synapse_http_server_requests:total[1m]) > 100
-    for: 5m
-    annotations:
-      description: '{{ $labels.instance }} QPS过高(当前值: {{ $value }}req/s)'
-      summary: '{{ $labels.instance }} SynapseHTTPServerQPS'
