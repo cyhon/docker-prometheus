@@ -60,7 +60,7 @@ scrape_configs:
   - job_name: 'PostgreSQL'
     scrape_interval: 1m
     static_configs:
-      - targets: ['master-exporter.pg-staff:9092','master-exporter.pg-retail:8000']
+      - targets: ['master-exporter.pg-staff:9092','master-exporter.pg-retail:9092']
 
   - job_name: 'container'
     scrape_interval: 1m
