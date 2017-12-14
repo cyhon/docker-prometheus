@@ -66,6 +66,11 @@ scrape_configs:
     scrape_interval: 1m
     static_configs:
       - targets: ['mongo-exporter.mongo-cluster:9092']
+  
+  - job_name: 'ElasticSearch'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['es-exporter.knowledge:9092']
 
   - job_name: 'container'
     scrape_interval: 1m
