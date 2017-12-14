@@ -62,6 +62,11 @@ scrape_configs:
     static_configs:
       - targets: ['master-exporter.pg-staff:9092','master-exporter.pg-retail:9092']
 
+  - job_name: 'MongoDB'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['mongo-exporter.mongo-cluster:9092']
+
   - job_name: 'container'
     scrape_interval: 1m
     dns_sd_configs:
