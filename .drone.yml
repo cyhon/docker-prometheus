@@ -1,3 +1,7 @@
+cache:
+  mount:
+    - /drone/repository
+
 publish:
   docker:
     repo: monitor/prometheus
