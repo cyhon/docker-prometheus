@@ -1,0 +1,14 @@
+scrape_configs:
+  - job_name: 'homeserver'
+    metrics_path: "/_synapse/metrics"
+    static_configs:
+      - targets: ['staff-server.finochat:9092','retail-server.finochat:9092']
+
+  - job_name: 'gateway'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['gateway.finochat:9092']
+
+  - job_name: 'Platform HTTP Service'
+    static_configs:
+      - targets: ['auth-center.finochat:9092','uac-server.finochat:9092','rcs-server.finochat:9092', 'platform-api.finochat:9092']

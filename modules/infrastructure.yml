@@ -1,0 +1,16 @@
+scrape_configs:
+
+  - job_name: 'PostgreSQL'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['master-exporter.pg-staff:9092','master-exporter.pg-retail:9092']
+
+  - job_name: 'MongoDB'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['mongo-exporter.mongo-cluster:9092']
+  
+  - job_name: 'ElasticSearch'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['es-exporter.knowledge:9092']
