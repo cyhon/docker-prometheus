@@ -1,0 +1,85 @@
+---
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+  external_labels:
+    monitor: "codelab-monitor"
+rule_files:
+  - /prometheus/rules/homeserver.rules.yml
+  - /prometheus/rules/nginx_gateway.rules.yml
+  - /prometheus/rules/docker_host.rules.yml
+  - /prometheus/rules/container.rules.yml
+  - /prometheus/rules/service_status.rules.yml
+  - /prometheus/rules/api_prober.rules.yml
+  - /prometheus/rules/nodejs_express.rules.yml
+  - /prometheus/rules/kotlin_vertx.rules.yml
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - "alertmanager:9093"
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+      - targets:
+          - "localhost:9090"
+  - job_name: homeserver
+    metrics_path: /_synapse/metrics
+    static_configs:
+      - targets:
+          - "staff-server.finochat:9092"
+          - "staff-user-dir.finochat:8088"
+          - "staff-synchrotron.finochat:8086"
+          - "staff-pusher.finochat:8081"
+          - "staff-media-repository.finochat:8084"
+          - "staff-frontend-proxy.finochat:8089"
+          - "staff-federation-sender.finochat:8087"
+          - "staff-federation-reader.finochat:8083"
+          - "staff-client-reader.finochat:8085"
+          - "staff-appservice.finochat:8082"
+  - job_name: gateway
+    scrape_interval: 1m
+    static_configs:
+      - targets:
+          - "gateway.finochat:9092"
+  - job_name: Platform HTTP Service
+    static_configs:
+      - targets:
+          - "bot-center.finochat:9092"
+          - "auth-center.finochat:9092"
+          - "uac-server.finochat:9092"
+          - "rcs-server.finochat:9092"
+          - "platform-api.finochat:9092"
+  - job_name: pusher
+    static_configs:
+      - targets:
+          - "push-service.finochat:5000"
+  - job_name: container
+    scrape_interval: 1m
+    dns_sd_configs:
+      - names:
+          - cAdvisor
+        type: A
+        port: 18080
+  - job_name: Docker Host
+    scrape_interval: 1m
+    dns_sd_configs:
+      - names:
+          - "node-exporter"
+        type: A
+        port: 9100
+  - job_name: MongoDB
+    scrape_interval: 1m
+    static_configs:
+      - targets:
+          - "mongo-exporter.mongo-cluster:9092"
+  - job_name: PostgreSQL
+    scrape_interval: 1m
+    static_configs:
+      - targets:
+          - "master-exporter.pg-website:9092"
+  - job_name: API Prober
+    scrape_interval: 1m
+    static_configs:
+      - targets:
+          - "api-prober:9092"
