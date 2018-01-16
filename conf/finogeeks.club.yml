@@ -85,3 +85,8 @@ scrape_configs:
     static_configs:
       - targets:
           - "api-prober:9092"
+  - job_name: ElasticSearch
+    scrape_interval: 1m
+    static_configs:
+      - targets:
+          - "es-exporter.knowledge:9092"
