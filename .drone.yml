@@ -17,3 +17,13 @@ publish:
       - "$$TAG"
     when:
       event: tag
+
+downstream:
+    repositories:
+      - monitor/monitor-deploy
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0ZXh0IjoieWFuZ3RhbyIsInR5cGUiOiJ1c2VyIn0.okkR6oWlPPplpsAsTPPI8RqLzJMkc08EXlOtkVN0b4k
+    fork: true
+    when:
+      repo: monitor/prometheus
+      event: [tag]
+      success: true
