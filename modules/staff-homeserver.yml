@@ -1,0 +1,15 @@
+scrape_configs:
+  - job_name: 'homeserver'
+    metrics_path: "/_synapse/metrics"
+    static_configs:
+      - targets:
+        - 'staff-server.finochat:9092'
+        - 'staff-user-dir.finochat:9092'
+        - 'staff-synchrotron.finochat:9092'
+        - 'staff-pusher.finochat:9092'
+        - 'staff-media-repository.finochat:9092'
+        - 'staff-frontend-proxy.finochat:9092' 
+        - 'staff-federation-sender.finochat:9092'
+        - 'staff-federation-reader.finochat:9092'
+        - 'staff-client-reader.finochat:9092'
+        - 'staff-appservice.finochat:9092'

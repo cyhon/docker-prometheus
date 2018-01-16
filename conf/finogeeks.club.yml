@@ -1,104 +1,86 @@
-# my global config
+---
 global:
-  scrape_interval:     30s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
-  evaluation_interval: 30s # Evaluate rules every 15 seconds. The default is every 1 minute.
-#  scrape_timeout:       5s # scrape_timeout is set to the global default (10s).
-
-  # Attach these labels to any time series or alerts when communicating with
-  # external systems (federation, remote storage, Alertmanager).
+  scrape_interval: 30s
+  evaluation_interval: 30s
   external_labels:
-      monitor: 'codelab-monitor'
-
-# Load rules once and periodically evaluate them according to the global 'evaluation_interval'.
+    monitor: "codelab-monitor"
 rule_files:
-    - "/prometheus/rules/docker_host.rules.yml"
-    - "/prometheus/rules/service_status.rules.yml"
-    - "/prometheus/rules/synapse.rules.yml"
-    - "/prometheus/rules/openldap.rules.yml"
-
+  - /prometheus/rules/homeserver.rules.yml
+  - /prometheus/rules/nginx_gateway.rules.yml
+  - /prometheus/rules/docker_host.rules.yml
+  - /prometheus/rules/container.rules.yml
+  - /prometheus/rules/service_status.rules.yml
+  - /prometheus/rules/api_prober.rules.yml
+  - /prometheus/rules/nodejs_express.rules.yml
+  - /prometheus/rules/kotlin_vertx.rules.yml
 alerting:
   alertmanagers:
-  - static_configs:
-    - targets:
-      - alertmanager:9093
-
-# A scrape configuration containing exactly one endpoint to scrape:
-# Here it's Prometheus itself.
+    - static_configs:
+        - targets:
+            - "alertmanager:9093"
 scrape_configs:
-  # The job name is added as a label `job=<job_name>` to any timeseries scraped from this config.
-  - job_name: 'prometheus'
-
-    # metrics_path defaults to '/metrics'
-    # scheme defaults to 'http'.
-
+  - job_name: prometheus
     static_configs:
-      - targets: ['localhost:9090']
-
-  - job_name: 'synapse'
-    metrics_path: "/_synapse/metrics"
+      - targets:
+          - "localhost:9090"
+  - job_name: homeserver
+    metrics_path: /_synapse/metrics
     static_configs:
-      - targets: ['staff-server.finochat:9092']
-
-  - job_name: 'sygnal'
-    static_configs:
-      - targets: ['pusher.finogeeks.club:5000']
-
-  - job_name: 'openldap'
-    static_configs:
-      - targets: ['openldap-exporter:8080']
-        labels:
-          domain: 'finogeeks.club'
-
-  - job_name: 'bots'
-    static_configs:
-      - targets: ['proxybot.chat-proxy:9092']
-
-  - job_name: 'HTTP Service'
-    static_configs:
-      - targets: ['bot.UAC:9092', 'rcskt.UAC:9092']
-
-  - job_name: 'rancher'
+      - targets:
+          - "staff-server.finochat:9092"
+          - "staff-user-dir.finochat:9092"
+          - "staff-synchrotron.finochat:9092"
+          - "staff-pusher.finochat:9092"
+          - "staff-media-repository.finochat:9092"
+          - "staff-frontend-proxy.finochat:9092"
+          - "staff-federation-sender.finochat:9092"
+          - "staff-federation-reader.finochat:9092"
+          - "staff-client-reader.finochat:9092"
+          - "staff-appservice.finochat:9092"
+  - job_name: gateway
     scrape_interval: 1m
     static_configs:
-      - targets: ['rancher-exporter:9173']
-
-#  - job_name: 'cAdvisor'
-#    scrape_interval: 1m
-#    dns_sd_configs:
-#    - names:
-#      - cAdvisor
-#      type: 'A'
-#      port: 8080
-#
-#  - job_name: 'machine'
-#    scrape_interval: 1m
-#    dns_sd_configs:
-#    - names:
-#      - node-exporter
-#      type: 'A'
-#      port: 9100
-
-  - job_name: 'os'
+      - targets:
+          - "gateway.finochat:9092"
+  - job_name: Platform HTTP Service
+    static_configs:
+      - targets:
+          - "auth-center.finochat:9092"
+          - "uac-server.finochat:9092"
+          - "rcs-server.finochat:9092"
+          - "platform-api.finochat:9092"
+  - job_name: pusher
+    static_configs:
+      - targets:
+          - "push-service.finochat:5000"
+  - job_name: Business HTTP Service
     scrape_interval: 1m
-    metrics_path: '/api/v1/allmetrics'
-    params:
-      format: [prometheus]
+    static_configs:
+      - targets:
+          - "login-provider.account-adapter:9092"
+          - "ref-server.knowledge:8000"
+          - "search-server.knowledge:9092"
+  - job_name: container
+    scrape_interval: 1m
     dns_sd_configs:
-    - names:
-      - netdata
-      type: 'A'
-      port: 19999
-
-#  - job_name: 'statsd'
-#    static_configs:
-#      - targets: ['statsd-exporter:9102']
-
-  - job_name: 'nginx'
+      - names:
+          - cAdvisor
+        type: A
+        port: 18080
+  - job_name: Docker Host
+    scrape_interval: 1m
+    dns_sd_configs:
+      - names:
+          - "node-exporter"
+        type: A
+        port: 9100
+  - job_name: MongoDB
     scrape_interval: 1m
     static_configs:
-      - targets: ['10.135.135.206:9092']
-
-  - job_name: 'api-prober'
+      - targets:
+          - "mongo-exporter.mongo-cluster:9092"
+  - job_name: API Prober
     scrape_interval: 1m
     static_configs:
-      - targets: ['api-prober:9092']
+      - targets:
+          - "api-prober:9092"

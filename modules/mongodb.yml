@@ -1,0 +1,5 @@
+scrape_configs:
+  - job_name: 'MongoDB'
+    scrape_interval: 1m
+    static_configs:
+      - targets: ['mongo-exporter.mongo-cluster:9092']
