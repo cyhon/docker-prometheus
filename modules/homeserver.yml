@@ -1,0 +1,6 @@
+scrape_configs:
+  - job_name: 'homeserver'
+    metrics_path: "/_synapse/metrics"
+    static_configs:
+      - targets:
+        - 'staff-server.finochat:9092'
