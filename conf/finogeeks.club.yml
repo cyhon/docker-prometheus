@@ -45,6 +45,7 @@ scrape_configs:
   - job_name: Platform HTTP Service
     static_configs:
       - targets:
+          - "bot-center.finochat:9092"
           - "auth-center.finochat:9092"
           - "uac-server.finochat:9092"
           - "rcs-server.finochat:9092"
