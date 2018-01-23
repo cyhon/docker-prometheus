@@ -2,7 +2,7 @@ groups:
 - name: NodejsExpress.rules
   rules:
   - record: nodejs_error_rate:rate5m
-    expr: sum(rate(http_request_duration_seconds_count{code=~'1.*|4.*|5.*'}[5m])) by (job, instance)/sum(rate(http_request_duration_seconds_count[5m])) by (job, instance) * 100
+    expr: round(sum(rate(http_request_duration_seconds_count{code=~'1.*|4.*|5.*'}[5m])) by (job, instance)) / ceil(sum(rate(http_request_duration_seconds_count[5m])) by (job, instance)) * 100
   - record: nodejs_duration:tp90
     expr: max(http_request_duration_seconds{quantile="0.9"}) by (job, instance)
   - alert: RESTful HTTP服务
