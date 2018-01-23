@@ -1,7 +1,7 @@
 FROM docker.finogeeks.club/base/alpine:3.7
 
 MAINTAINER "linhaitao@finogeeks.com"
-ENV VERSION 2.0.0
+ENV VERSION 2.1.0
 
 RUN export https_proxy=http://10.135.186.25:3128 \
     && apk add --no-cache wget tar \
