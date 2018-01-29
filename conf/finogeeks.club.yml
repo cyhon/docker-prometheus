@@ -50,6 +50,7 @@ scrape_configs:
           - "uac-server.finochat:9092"
           - "rcs-server.finochat:9092"
           - "platform-api.finochat:9092"
+          - "netdisk.netdisk:9092"
   - job_name: pusher
     static_configs:
       - targets:
